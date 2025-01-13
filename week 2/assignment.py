@@ -15,11 +15,11 @@ class Line:
         self.point_2 = point_2
 
     @property
-    def is_vertical(self):
+    def is_vertical(self) -> bool:
         return self.point_1.x == self.point_2.x
 
     @property
-    def is_horizontal(self):
+    def is_horizontal(self) -> bool:
         return self.point_1.y == self.point_2.y
 
     @property
