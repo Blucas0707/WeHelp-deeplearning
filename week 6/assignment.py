@@ -144,21 +144,17 @@ def read_titantic_csv(filename: str) -> np.ndarray:
 
 
 def get_standardized_titanic_data(data: np.ndarray) -> np.ndarray:
-    """對 Titanic 數據進行標準化 (Z-score)，標準化 `Age` 和 `Fare`"""
-    pclass = data[:, 0]  # 艙等 (保持不變)
-    sex = data[:, 1]  # 性別 (保持不變)
+    pclass = data[:, 0]
+    sex = data[:, 1]
 
-    # 標準化年齡和票價
     age = z_score_standardize(data[:, 2])
     fare = z_score_standardize(data[:, 5])
 
-    sibsp = data[:, 3]  # 兄弟姊妹/配偶數 (保持不變)
-    parch = data[:, 4]  # 父母/子女數 (保持不變)
+    sibsp = data[:, 3]
+    parch = data[:, 4]
+    survived = data[:, 6]
 
-    survived = data[:, 6]  # 存活結果 (標籤，保持不變)
-
-    standardized_data = np.array([pclass, sex, age, sibsp, parch, fare, survived]).T
-    return standardized_data
+    return np.array([pclass, sex, age, sibsp, parch, fare, survived]).T
 
 
 def get_split_train_test_data(data_list: list[np.ndarray], train_ratio: float):
@@ -406,9 +402,6 @@ class NeuralNetworkTaskHandler:
                 ).reshape(-1, 1)  # (batch_size, 1)
 
                 output_values = nn.forward(inputs)
-
-                # loss = BCE().get_total_loss(output_values, expected_values)
-
                 output_losses = BCE().get_output_losses(output_values, expected_values)
 
                 nn.backward(output_losses)
