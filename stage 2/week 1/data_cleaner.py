@@ -7,24 +7,29 @@ INPUT_FOLDER = "ptt_titles"
 OUTPUT_FILE = "cleaned_data.csv"
 
 
-# 定義標題清理函式
 def clean_title(title: str) -> str:
     if not isinstance(title, str):
         return None
 
-    title = title.strip().lower()  # 去空格 & 轉小寫
+    # 移除空格 & 轉小寫
+    title = title.strip().lower()
+
     # 移除 Re: & FW:
     if title.startswith("re:") or title.startswith("fw:"):
         return None
 
+    # 移除沒有分類標籤的標題
     if not re.match(r"^\[.*?\]", title):
-        return None  # 移除沒有分類標籤的標題
+        return None
 
+    # 移除包含「公告」、「水桶」或「警告」的標題
     if any(keyword in title for keyword in ["公告", "水桶", "警告"]):
-        return None  # 移除包含「公告」、「水桶」或「警告」的標題
+        return None
 
-    title = re.sub(r"http\S+|www\S+", "", title)  # 移除網址
-    title = re.sub(r"[^\w\s#@]", "", title)  # 移除特殊符號，保留 # 和 @
+    # 移除網址
+    title = re.sub(r"http\S+|www\S+", "", title)
+    # 移除特殊符號，保留 # 和 @
+    title = re.sub(r"[^\w\s#@]", "", title)
 
     # 移除過短標題
     if len(title) < 3:
