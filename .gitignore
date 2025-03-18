@@ -10,3 +10,4 @@ ptt_article_ids/
 ptt_titles/
 *.sh
 cleaned_data.csv
+tokenized_data.csv
