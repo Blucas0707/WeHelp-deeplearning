@@ -54,5 +54,5 @@ def main(input_file: str, output_file: str) -> None:
 
 if __name__ == "__main__":
     input_file = "sample_cleaned_data.csv"
-    output_file = "test_tokenized_data.csv"
+    output_file = "tokenized_data.csv"
     main(input_file, output_file)
