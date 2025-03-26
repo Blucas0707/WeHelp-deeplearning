@@ -11,3 +11,5 @@ ptt_titles/
 *.sh
 cleaned_data.csv
 tokenized_data.csv
+grid_search_results.csv
+traning_record.txt
