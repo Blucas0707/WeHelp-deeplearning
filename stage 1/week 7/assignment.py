@@ -17,12 +17,12 @@ class WeightDataset(Dataset):
     def read_csv(self, filename: str):
         data_list = []
 
-        with open(filename, "r") as file:
+        with open(filename, 'r') as file:
             reader = csv.reader(file)
             next(reader)
 
             for row in reader:
-                gender = 0 if row[0] == "Female" else 1
+                gender = 0 if row[0] == 'Female' else 1
                 height = float(row[1])
                 weight = float(row[2])
                 data_list.append([gender, height, weight])
@@ -54,13 +54,13 @@ class TitanicDataset(Dataset):
     def read_csv(self, filename: str):
         data_list = []
 
-        with open(filename, "r") as file:
+        with open(filename, 'r') as file:
             reader = csv.reader(file)
             next(reader)
 
             for row in reader:
                 pclass = int(row[2])
-                sex = 0 if row[4] == "female" else 1
+                sex = 0 if row[4] == 'female' else 1
                 age = float(row[5]) if row[5] else np.nan
                 sibsp = int(row[6])
                 parch = int(row[7])
@@ -168,7 +168,7 @@ def test_weight_model(
 
     rmse_real = np.sqrt((test_loss / len(dataloader)) * (weight_std**2))
     mae_real = mae_loss / len(dataloader)
-    print(f"Test Loss (RMSE): {rmse_real:.4f}, MAE: {mae_real:.4f}\n")
+    print(f'Test Loss (RMSE): {rmse_real:.4f}, MAE: {mae_real:.4f}\n')
 
 
 def test_titanic_model(model: nn.Module, dataloader: DataLoader, criterion: _Loss):
@@ -188,13 +188,13 @@ def test_titanic_model(model: nn.Module, dataloader: DataLoader, criterion: _Los
 
     avg_test_loss = test_loss / len(dataloader)
     accuracy = correct_predictions / total_samples * 100
-    print(f"Test Loss: {avg_test_loss:.4f}, Accuracy: {accuracy:.2f}%\n")
+    print(f'Test Loss: {avg_test_loss:.4f}, Accuracy: {accuracy:.2f}%\n')
 
 
 class NeuralNetworkTaskHandler:
     @staticmethod
     def exec_task_weight_prediction():
-        dataset = WeightDataset("gender-height-weight.csv")
+        dataset = WeightDataset('gender-height-weight.csv')
         train_size = int(0.8 * len(dataset))
         test_size = len(dataset) - train_size
         train_dataset, test_dataset = torch.utils.data.random_split(
@@ -209,7 +209,7 @@ class NeuralNetworkTaskHandler:
         optimizer = optim.SGD(model.parameters(), lr=0.01)
 
         train_model(model, train_loader, criterion, optimizer)
-        print("Weight Prediction Task Training completed")
+        print('Weight Prediction Task Training completed')
         test_weight_model(
             model,
             test_loader,
@@ -220,7 +220,7 @@ class NeuralNetworkTaskHandler:
 
     @staticmethod
     def exec_task_titantic_prediction():
-        dataset = TitanicDataset("titanic.csv")
+        dataset = TitanicDataset('titanic.csv')
         train_size = int(0.8 * len(dataset))
         test_size = len(dataset) - train_size
         train_dataset, test_dataset = torch.utils.data.random_split(
@@ -235,10 +235,10 @@ class NeuralNetworkTaskHandler:
         optimizer = optim.Adam(model.parameters(), lr=0.01)
 
         train_model(model, train_loader, criterion, optimizer)
-        print("Titanic Prediction Task Training completed")
+        print('Titanic Prediction Task Training completed')
         test_titanic_model(model, test_loader, criterion)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     NeuralNetworkTaskHandler.exec_task_weight_prediction()
     NeuralNetworkTaskHandler.exec_task_titantic_prediction()

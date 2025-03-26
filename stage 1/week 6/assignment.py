@@ -91,12 +91,12 @@ def z_score_standardize(values: list[float]) -> list[float]:
 def read_gender_height_weight_csv(filename: str):
     data_list = []
 
-    with open(filename, "r") as file:
+    with open(filename, 'r') as file:
         reader = csv.reader(file)
         next(reader)
 
         for row in reader:
-            gender = 0 if row[0] == "Female" else 1
+            gender = 0 if row[0] == 'Female' else 1
             height = float(row[1])
             weight = float(row[2])
             data_list.append([gender, height, weight])
@@ -116,13 +116,13 @@ def get_standardized_height_weight_data(data: np.ndarray):
 def read_titantic_csv(filename: str) -> np.ndarray:
     data_list = []
 
-    with open(filename, "r") as file:
+    with open(filename, 'r') as file:
         reader = csv.reader(file)
         next(reader)
 
         for row in reader:
             pclass = int(row[2])
-            sex = 0 if row[4] == "female" else 1
+            sex = 0 if row[4] == 'female' else 1
             age = float(row[5]) if row[5] else np.nan
             sibsp = int(row[6])
             parch = int(row[7])
@@ -274,7 +274,7 @@ class NeuralNetwork(BaseNeuralNetwork):
 class NeuralNetworkTaskHandler:
     @staticmethod
     def exec_task_weight_prediction():
-        print("\n=======================WEIGHT PREDICTION=========================\n")
+        print('\n=======================WEIGHT PREDICTION=========================\n')
         nn = NeuralNetwork(
             hidden_weights=[
                 np.random.randn(16, 2),
@@ -295,14 +295,14 @@ class NeuralNetworkTaskHandler:
         batch_size = 100
         epochs = 100
 
-        traning_data = read_gender_height_weight_csv("gender-height-weight.csv")
+        traning_data = read_gender_height_weight_csv('gender-height-weight.csv')
         standarized_data = get_standardized_height_weight_data(traning_data)
         training_data, testing_data = get_split_train_test_data(
             standarized_data, traning_data_ratio
         )
 
         patience = 30
-        loss = best_loss = float("inf")
+        loss = best_loss = float('inf')
         no_improve_count = 0
 
         for epoch in range(epochs):
@@ -313,7 +313,7 @@ class NeuralNetworkTaskHandler:
                 no_improve_count += 1
 
             if no_improve_count >= patience:
-                print(f"Early Stopping at Epoch {epoch}")
+                print(f'Early Stopping at Epoch {epoch}')
                 break
 
             np.random.shuffle(training_data)
@@ -356,11 +356,11 @@ class NeuralNetworkTaskHandler:
 
         MAE_loss = np.mean(np.abs(expected_weights - predicted_weights))
 
-        print(f"MSE_loss={MSE_testing_weight_loss}, {MAE_loss=}\n")
+        print(f'MSE_loss={MSE_testing_weight_loss}, {MAE_loss=}\n')
 
     @staticmethod
     def exec_task_titantic_prediction():
-        print("\n=======================TITANIC PREDICTION=========================\n")
+        print('\n=======================TITANIC PREDICTION=========================\n')
         nn = NeuralNetwork(
             hidden_weights=[
                 np.random.randn(16, 6),
@@ -381,7 +381,7 @@ class NeuralNetworkTaskHandler:
         batch_size = 64
         epochs = 100
 
-        raw_traning_data = read_titantic_csv("titanic.csv")
+        raw_traning_data = read_titantic_csv('titanic.csv')
         standardized_training_data = get_standardized_titanic_data(raw_traning_data)
 
         training_data, testing_data = get_split_train_test_data(
@@ -419,34 +419,34 @@ class NeuralNetworkTaskHandler:
         correct_predictions = np.sum(predicted_labels == testing_expected_values)
         accuracy = correct_predictions / len(testing_expected_values)
 
-        print(f"Testing Accuracy: {accuracy * 100:.2f}%\n")
+        print(f'Testing Accuracy: {accuracy * 100:.2f}%\n')
 
     @staticmethod
     def exec_task_3_pytorch():
         # Q1
         data = torch.tensor([[2, 3, 1], [5, -2, 1]])
-        print(f"Q1: {data.shape=}, {data.dtype=}\n")
+        print(f'Q1: {data.shape=}, {data.dtype=}\n')
 
         # Q2
         random_tensor = torch.rand(3, 4, 2)
-        print(f"Q2: {random_tensor.shape=}, {random_tensor=}\n")
+        print(f'Q2: {random_tensor.shape=}, {random_tensor=}\n')
 
         # Q3
         ones_tensor = torch.ones(2, 1, 5)
-        print(f"Q3: {ones_tensor.shape=}, {ones_tensor=}\n")
+        print(f'Q3: {ones_tensor.shape=}, {ones_tensor=}\n')
 
         # Q4
         tensor_a = torch.tensor([[1, 2, 4], [2, 1, 3]])
         tensor_b = torch.tensor([[5], [2], [1]])
-        print(f"Q4: {torch.matmul(tensor_a, tensor_b)=}\n")
+        print(f'Q4: {torch.matmul(tensor_a, tensor_b)=}\n')
 
         # Q5
         tensor_a = torch.tensor([[1, 2], [2, 3], [-1, 3]])
         tensor_b = torch.tensor([[5, 4], [2, 1], [1, -5]])
-        print(f"Q5: {tensor_a * tensor_b=}\n")
+        print(f'Q5: {tensor_a * tensor_b=}\n')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     NeuralNetworkTaskHandler.exec_task_weight_prediction()
     NeuralNetworkTaskHandler.exec_task_titantic_prediction()
     NeuralNetworkTaskHandler.exec_task_3_pytorch()

@@ -93,7 +93,7 @@ class RegressionNetwork(NeuralNetwork):
     def _validate_config(self):
         if len(self.config.hidden_biases) != len(self.config.hidden_weights):
             raise ValueError(
-                "Number of hidden biases must match number of hidden weights"
+                'Number of hidden biases must match number of hidden weights'
             )
 
     def forward(self, input_values: np.ndarray):
@@ -119,7 +119,7 @@ class BinaryClassificationNetwork(NeuralNetwork):
     def _validate_config(self):
         if len(self.config.hidden_biases) != len(self.config.hidden_weights):
             raise ValueError(
-                "Number of hidden biases must match number of hidden weights"
+                'Number of hidden biases must match number of hidden weights'
             )
 
     def forward(self, input_values: np.ndarray):
@@ -145,7 +145,7 @@ class MultiLabelClassificationNetwork(NeuralNetwork):
     def _validate_config(self):
         if len(self.config.hidden_biases) != len(self.config.hidden_weights):
             raise ValueError(
-                "Number of hidden biases must match number of hidden weights"
+                'Number of hidden biases must match number of hidden weights'
             )
 
     def forward(self, input_values: np.ndarray):
@@ -170,7 +170,7 @@ class MultiClassClassificationNetwork(NeuralNetwork):
     def _validate_config(self):
         if len(self.config.hidden_biases) != len(self.config.hidden_weights):
             raise ValueError(
-                "Number of hidden biases must match number of hidden weights"
+                'Number of hidden biases must match number of hidden weights'
             )
 
     def forward(self, input_values: np.ndarray):
@@ -202,11 +202,11 @@ class NeuralNetworkTaskHandler:
         nn = RegressionNetwork(config=network_config)
         output_values = nn.forward(np.array([1.5, 0.5]))
         expected_values = np.array([0.8, 1])
-        print("Total Loss:", MSE()(expected_values, output_values))
+        print('Total Loss:', MSE()(expected_values, output_values))
 
         output_values = nn.forward(np.array([0, 1]))
         expected_values = np.array([0.5, 0.5])
-        print("Total Loss:", MSE()(expected_values, output_values))
+        print('Total Loss:', MSE()(expected_values, output_values))
 
     @staticmethod
     def exec_task_2_binary_classification():
@@ -222,11 +222,11 @@ class NeuralNetworkTaskHandler:
         nn = BinaryClassificationNetwork(config=network_config)
         output_values = nn.forward(np.array([0.75, 1.25]))
         expected_values = np.array([1])
-        print("Total Loss:", BCE()(expected_values, output_values))
+        print('Total Loss:', BCE()(expected_values, output_values))
 
         output_values = nn.forward(np.array([-1, 0.5]))
         expected_values = np.array([0])
-        print("Total Loss:", BCE()(expected_values, output_values))
+        print('Total Loss:', BCE()(expected_values, output_values))
 
     @staticmethod
     def exec_task_3_multi_label_classification():
@@ -242,11 +242,11 @@ class NeuralNetworkTaskHandler:
         nn = MultiLabelClassificationNetwork(config=network_config)
         output_values = nn.forward(np.array([1.5, 0.5]))
         expected_values = np.array([1, 0, 1])
-        print("Total Loss:", BCE()(expected_values, output_values))
+        print('Total Loss:', BCE()(expected_values, output_values))
 
         output_values = nn.forward(np.array([0, 1]))
         expected_values = np.array([1, 1, 0])
-        print("Total Loss:", BCE()(expected_values, output_values))
+        print('Total Loss:', BCE()(expected_values, output_values))
 
     @staticmethod
     def exec_task_4_multi_class_classification():
@@ -262,14 +262,14 @@ class NeuralNetworkTaskHandler:
         nn = MultiClassClassificationNetwork(config=network_config)
         output_values = nn.forward(np.array([1.5, 0.5]))
         expected_values = np.array([1, 0, 0])
-        print("Total Loss:", CCE()(expected_values, output_values))
+        print('Total Loss:', CCE()(expected_values, output_values))
 
         output_values = nn.forward(np.array([0, 1]))
         expected_values = np.array([0, 0, 1])
-        print("Total Loss:", CCE()(expected_values, output_values))
+        print('Total Loss:', CCE()(expected_values, output_values))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     NeuralNetworkTaskHandler.exec_task_1_regression()
     NeuralNetworkTaskHandler.exec_task_2_binary_classification()
     NeuralNetworkTaskHandler.exec_task_3_multi_label_classification()

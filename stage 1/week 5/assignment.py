@@ -194,13 +194,13 @@ class NeuralNetworkTaskHandler:
             nn.backward(output_losses)
             nn.zero_grad(learning_rate)
 
-        print(f"%%%%% Epoch = {epoch} %%%%%%\n")
+        print(f'%%%%% Epoch = {epoch} %%%%%%\n')
 
         if epoch == 1:
-            print(f"{nn.hidden_weights=}\n{nn.output_weight=}\n")
+            print(f'{nn.hidden_weights=}\n{nn.output_weight=}\n')
         else:
             loss = loss_function.get_total_loss(output_values, expected_values)
-            print(f"{loss=}\n")
+            print(f'{loss=}\n')
 
     @staticmethod
     def exec_task_2_binaryclassification(epoch: int = 1):
@@ -229,19 +229,19 @@ class NeuralNetworkTaskHandler:
             nn.backward(output_losses)
             nn.zero_grad(learning_rate)
 
-        print(f"%%%%% Epoch = {epoch} %%%%%%\n")
+        print(f'%%%%% Epoch = {epoch} %%%%%%\n')
 
         if epoch == 1:
-            print(f"{nn.hidden_weights=}\n{nn.output_weight=}\n")
+            print(f'{nn.hidden_weights=}\n{nn.output_weight=}\n')
         else:
             loss = loss_function.get_total_loss(output_values, expected_values)
-            print(f"{loss=}\n")
+            print(f'{loss=}\n')
 
 
-if __name__ == "__main__":
-    print("----- Task 1: Regression -----")
+if __name__ == '__main__':
+    print('----- Task 1: Regression -----')
     NeuralNetworkTaskHandler.exec_task_1_regression()
     NeuralNetworkTaskHandler.exec_task_1_regression(1000)
-    print("\n----- Task 2: Binary Classification -----")
+    print('\n----- Task 2: Binary Classification -----')
     NeuralNetworkTaskHandler.exec_task_2_binaryclassification()
     NeuralNetworkTaskHandler.exec_task_2_binaryclassification(1000)

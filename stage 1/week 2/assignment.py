@@ -36,7 +36,7 @@ class Line:
 class Circle:
     def __init__(self, center: Point, radius: float):
         if radius <= 0:
-            raise ValueError("Radius must be positive.")
+            raise ValueError('Radius must be positive.')
 
         self.center = center
         self.radius = radius
@@ -53,7 +53,7 @@ class Circle:
 class Polygon(ABC):
     def __init__(self, *vertices: Point):
         if len(vertices) < 3:
-            raise ValueError("A polygon must have at least 3 vertices.")
+            raise ValueError('A polygon must have at least 3 vertices.')
         self.vertices = vertices
 
     @property
@@ -65,7 +65,7 @@ class Polygon(ABC):
 class Quadrilateral(Polygon):
     def __init__(self, *vertices: Point):
         if len(vertices) != 4:
-            raise ValueError("A quadrilateral must have exactly 4 vertices.")
+            raise ValueError('A quadrilateral must have exactly 4 vertices.')
         self.vertices = vertices
 
     @property
@@ -124,7 +124,7 @@ class Enemy:
         self.life_point = 10
 
     def __str__(self) -> str:
-        return f"{self.label}, ({self.point.x}, {self.point.y}), {self.life_point}"
+        return f'{self.label}, ({self.point.x}, {self.point.y}), {self.life_point}'
 
     def is_alive(self) -> bool:
         return self.life_point > 0
@@ -216,36 +216,36 @@ class TaskHandler:
         print(GeometryUtils.are_perpendicular(line_a, line_c))
 
         circle_a = Circle(Point(6, 3), 2)
-        print(f"{GeometryUtils.get_circle_area(circle_a):.2f}")
+        print(f'{GeometryUtils.get_circle_area(circle_a):.2f}')
 
         circle_b = Circle(Point(8, 1), 1)
         print(GeometryUtils.are_circles_intersect(circle_a, circle_b))
 
         quad = Quadrilateral(Point(2, 0), Point(-1, -2), Point(4, -4), Point(5, -1))
-        print(f"{quad.perimeter:.2f}")
+        print(f'{quad.perimeter:.2f}')
 
     @staticmethod
     def run_task_2():
         turn = 10
         enemies = [
-            Enemy("E1", Point(-10, 2), Vector(2, -1)),
-            Enemy("E2", Point(-8, 0), Vector(3, 1)),
-            Enemy("E3", Point(-9, -1), Vector(3, 0)),
+            Enemy('E1', Point(-10, 2), Vector(2, -1)),
+            Enemy('E2', Point(-8, 0), Vector(3, 1)),
+            Enemy('E3', Point(-9, -1), Vector(3, 0)),
         ]
 
         towers = [
-            BasicTower("T1", Point(-3, 2)),
-            BasicTower("T2", Point(-1, -2)),
-            BasicTower("T3", Point(4, 2)),
-            BasicTower("T4", Point(7, 0)),
-            AdvancedTower("A1", Point(1, 1)),
-            AdvancedTower("A2", Point(4, -3)),
+            BasicTower('T1', Point(-3, 2)),
+            BasicTower('T2', Point(-1, -2)),
+            BasicTower('T3', Point(4, 2)),
+            BasicTower('T4', Point(7, 0)),
+            AdvancedTower('A1', Point(1, 1)),
+            AdvancedTower('A2', Point(4, -3)),
         ]
 
         GameProcedurer(turn, enemies, towers).start_game()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     task_handler = TaskHandler()
     task_handler.run_task_1()
     task_handler.run_task_2()

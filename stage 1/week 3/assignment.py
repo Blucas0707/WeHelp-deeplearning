@@ -20,7 +20,7 @@ class Network:
     def _validate_config(self):
         if len(self.config.hidden_biases) != len(self.config.hidden_weights):
             raise ValueError(
-                "Number of hidden biases must match number of hidden weights"
+                'Number of hidden biases must match number of hidden weights'
             )
 
     def forword(self):
@@ -45,7 +45,7 @@ class NeuralNetworkTaskHandler:
             output_bias=-0.5,
         )
         network_1 = Network(inputs=np.array([1.5, 0.5]), config=network_config)
-        print(f"{network_1.forword():.2f}")
+        print(f'{network_1.forword():.2f}')
 
         network_2 = Network(inputs=np.array([0, 1]), config=network_config)
         print(network_2.forword())
@@ -71,6 +71,6 @@ class NeuralNetworkTaskHandler:
         print(network_2.forword())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     NeuralNetworkTaskHandler.exec_network_1()
     NeuralNetworkTaskHandler.exec_network_2()
