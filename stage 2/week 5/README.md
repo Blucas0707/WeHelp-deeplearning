@@ -22,6 +22,8 @@
 │   └── web_crawler.py
 ├── cleaner/
 │   └── data_cleaner.py
+├── tokenizer/
+│   └── tokenizer.py
 ├── scripts/
 │   ├── train_doc2vec.py
 │   ├── run_classifier.py
